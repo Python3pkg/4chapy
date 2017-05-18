@@ -98,9 +98,9 @@ License: GPLv2
     t = FourchapyThread(boardID = boardID, threadID = threadID)
     log(10, "Created %r", t)
     
-    print(('=' * 100)) 
-    print((" Board %s - Thread %d" % (boardID, threadID)))
-    print(('=' * 100))
+    print('=' * 100) 
+    print(" Board %s - Thread %d" % (boardID, threadID))
+    print('=' * 100)
     print("")
     for post in t.Posts:
         post.display(nameWidth = opts.nameWidth)

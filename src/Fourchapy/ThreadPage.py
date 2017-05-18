@@ -25,9 +25,9 @@ import logging
 logger = logging.getLogger("Fourchapy." + __name__)
 log = logger.log
 
-from Fetcher import Fetch4chan
-from Thread import FourchapyThread
-from Errors import NoDataReturnedError, ThreadNotFoundError  # Don't import *; it will overwrite logging vars
+from .Fetcher import Fetch4chan
+from .Thread import FourchapyThread
+from .Errors import NoDataReturnedError, ThreadNotFoundError  # Don't import *; it will overwrite logging vars
 
 class FourchapyThreadPage(Fetch4chan):
     """ Represent a page of threads for a given board.     
@@ -50,7 +50,7 @@ class FourchapyThreadPage(Fetch4chan):
         try:
             json = self.fetchJSON(sleep = sleep)
         except NoDataReturnedError:
-            raise ThreadNotFoundError, "Page number %d from %r was not found on the server. " % (self.Page, self.Board)
+            raise ThreadNotFoundError("Page number %d from %r was not found on the server. " % (self.Page, self.Board))
         
         for data in json['threads']:
             threads.append(FourchapyThread(

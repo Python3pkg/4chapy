@@ -28,18 +28,18 @@ b = BoardIndex()
 # Look over the first two boards only
 for board in b.Boards[:2]:
     # Watch out for the unicode
-    print u"Board %s (%s)" % (board.Board, board.BoardName)
+    print(("Board %s (%s)" % (board.Board, board.BoardName)))
     if board.SafeForWork:
-        print "Safe for work"
+        print("Safe for work")
     else:
-        print "Not safe for work"
+        print("Not safe for work")
     # Get the first two pages only
     for page in board.getPages(maxPage = 1):
-        print "Looking at page %d of board %r" % (page.Page, board.Board)
+        print(("Looking at page %d of board %r" % (page.Page, board.Board)))
         # Get the first two threads only
         for thread in page.Threads[:2]:
-            print "---- Thread %d ----" % thread.Thread
+            print(("---- Thread %d ----" % thread.Thread))
             for post in thread.Posts:
-                print "--- %d ---" % post.Number
-                print "Subject: %r" % post.Subject
-                print "Comment: %r" % post.Comment
+                print(("--- %d ---" % post.Number))
+                print(("Subject: %r" % post.Subject))
+                print(("Comment: %r" % post.Comment))

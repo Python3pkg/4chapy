@@ -25,7 +25,7 @@ import logging
 logger = logging.getLogger("Fourchapy." + __name__)
 log = logger.log
 
-from urllib import urlopen
+from urllib.request import urlopen
 import datetime
 from json import loads
 import time

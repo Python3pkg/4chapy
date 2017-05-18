@@ -27,6 +27,6 @@ from Fourchapy import Thread
 t = Thread(boardID = 'diy', threadID = 12345)
 # Loop over all posts in the thread and print out info from the post
 for post in t.Posts:
-    print(("--- %d ---" % post.Number))
-    print(("Subject: %s" % post.Subject))
-    print(("Comment: %s" % post.Comment))
+    print("--- %d ---" % post.Number)
+    print("Subject: %s" % post.Subject)
+    print("Comment: %s" % post.Comment)

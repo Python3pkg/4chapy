@@ -78,7 +78,7 @@ class FourchapyBoard(object):
     
     def display(self, nameWidth = 15):
         """ Return a multi-line string that displays this post's info. """
-        print((self.displayToString(nameWidth = nameWidth)))
+        print(self.displayToString(nameWidth = nameWidth))
     
     def getMinPage(self):
         """ Returns the lowest page number for the board """

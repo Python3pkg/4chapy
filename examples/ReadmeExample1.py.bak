@@ -15,18 +15,31 @@
 #    You should have received a copy of the GNU General Public License
 #    along with 4chapy.  If not, see http://www.gnu.org/licenses/old-licenses/gpl-2.0.html 
 #===============================================================================
-''' Second example from the README file
+''' First example from the README file
 Created on Dec 25, 2012
 
 @author: Paulson McIntyre (GpMidi) <paul@gpmidi.net>
 '''
 
 # Import the library
-from Fourchapy import Thread
-# Download a thread from diy with an ID of 12345
-t = Thread(boardID = 'diy', threadID = 12345)
-# Loop over all posts in the thread and print out info from the post
-for post in t.Posts:
-    print(("--- %d ---" % post.Number))
-    print(("Subject: %s" % post.Subject))
-    print(("Comment: %s" % post.Comment))
+from Fourchapy import BoardIndex
+# Download a list of all boards and basic info about them (via http)
+b = BoardIndex()
+# Look over the first two boards only
+for board in b.Boards[:2]:
+    # Watch out for the unicode
+    print("Board %s (%s)" % (board.Board, board.BoardName))
+    if board.SafeForWork:
+        print("Safe for work")
+    else:
+        print("Not safe for work")
+    # Get the first two pages only
+    for page in board.getPages(maxPage = 1):
+        print("Looking at page %d of board %r" % (page.Page, board.Board))
+        # Get the first two threads only
+        for thread in page.Threads[:2]:
+            print("---- Thread %d ----" % thread.Thread)
+            for post in thread.Posts:
+                print("--- %d ---" % post.Number)
+                print("Subject: %r" % post.Subject)
+                print("Comment: %r" % post.Comment)

@@ -20,9 +20,9 @@ Created on Sep 9, 2012
 #    along with 4chapy.  If not, see http://www.gnu.org/licenses/old-licenses/gpl-2.0.html 
 #===============================================================================
 
-from Thread import FourchapyThread
-from BoardIndex import FourchapyBoardIndex
-from ThreadPage import FourchapyThreadPage
+from .Thread import FourchapyThread
+from .BoardIndex import FourchapyBoardIndex
+from .ThreadPage import FourchapyThreadPage
 
 Thread = FourchapyThread
 BoardIndex = FourchapyBoardIndex

@@ -25,12 +25,12 @@ import logging
 logger = logging.getLogger("Fourchapy." + __name__)
 log = logger.log
 
-from urllib import urlopen
+from urllib.request import urlopen
 import datetime
 from json import loads
 import time
 
-from Errors import NoDataReturnedError, RequestRateTooHigh, InvalidDataReturnedError, Fetch404Error
+from .Errors import NoDataReturnedError, RequestRateTooHigh, InvalidDataReturnedError, Fetch404Error
 
 # Keep track of last request
 last = {}
@@ -76,7 +76,7 @@ class Fetch4chan(object):
             self.URL = url
         if not self.URL:
             log(40, "No URL defined")
-            raise ValueError, "No URL defined"
+            raise ValueError("No URL defined")
         self.Proxies = proxies
         # A list of attrs that have been acquired for this object
         self._autoFetched = {}
@@ -160,7 +160,7 @@ class Fetch4chan(object):
         for info on sleep vs exception for over-limit conditions.  
         """
         t = type(self).__name__
-        if last.has_key(t):
+        if t in last:
             log(5, "Last request: %r", last[t])
             delta = datetime.datetime.now() - last[t]
             if delta < datetime.timedelta.min:
@@ -186,7 +186,7 @@ class Fetch4chan(object):
         if data is None:
             data = ''
         elif isinstance(data, dict):
-            for k, v in data.items():
+            for k, v in list(data.items()):
                 if k is None or v is None:
                     del data[k]
         elif isinstance(data, str):
@@ -229,7 +229,7 @@ class Fetch4chan(object):
                               ignoreRateLimit = ignoreRateLimit,
                               )
         if len(text) == 0:
-            raise NoDataReturnedError, "A zero byte file was returned"
+            raise NoDataReturnedError("A zero byte file was returned")
         i = 1
         while i * 50 < len(text):
             log(5, 'Fetched data (line %05d): %r' % (i, text[(i - 1) * 50:i * 50]))
@@ -237,7 +237,7 @@ class Fetch4chan(object):
         log(10, "Translating JSON into objects")            
         try:
             ret = loads(text)
-        except ValueError, e:
+        except ValueError as e:
             log(10, 'Failed to decode JSON with %r', e)
             if '404 Not Found' in text[:200]:
                 # May have a 404 - Need to validate

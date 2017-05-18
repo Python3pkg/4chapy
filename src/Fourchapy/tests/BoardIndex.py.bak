@@ -4,7 +4,7 @@ Created on Dec 25, 2012
 @author: Paulson McIntyre (GpMidi) <paul@gpmidi.net>
 '''
 import unittest
-from .ConfigBase import ConfigBasedTests
+from ConfigBase import ConfigBasedTests
 
 class BoardIndexFetchSequence(ConfigBasedTests):
     
@@ -112,25 +112,25 @@ class BoardIndexTestSequence(BoardConfigBasedTests):
         boardDict = self.index.BoardsDict
         
         # Check data values for all known boards
-        for boardID, board in list(boardDict.items())[:self.recursionMaxBoards]:
+        for boardID, board in boardDict.items()[:self.recursionMaxBoards]:
             # Board ID tests
             self.assertEqual(boardID, board.Board, "Board ID str should match boardObj.Board")
             self.assertTrue(len(boardID) <= 5, "Board ID should be short")
             self.assertTrue(hasattr(board, 'Board'), 'Board should be defined')
-            self.assertTrue(isinstance(board.Board, str) or board.Board is None, 'Board should be unicode based')
+            self.assertTrue(isinstance(board.Board, unicode) or board.Board is None, 'Board should be unicode based')
             
             # Other values
             self.assertTrue(hasattr(board, 'ThreadsPerPage'), 'ThreadsPerPage should be defined')
-            self.assertTrue(isinstance(board.ThreadsPerPage, int) or board.ThreadsPerPage is None, 'ThreadsPerPage should be int based')
+            self.assertTrue(isinstance(board.ThreadsPerPage, (int, long)) or board.ThreadsPerPage is None, 'ThreadsPerPage should be int based')
             
             self.assertTrue(hasattr(board, 'Pages'), 'Pages should be defined')
-            self.assertTrue(isinstance(board.Pages, int) or board.Pages is None, 'Pages should be int based')
+            self.assertTrue(isinstance(board.Pages, (int, long)) or board.Pages is None, 'Pages should be int based')
             
             self.assertTrue(hasattr(board, 'SafeForWork'), 'SafeForWork should be defined')
             self.assertTrue(isinstance(board.SafeForWork, bool) or board.SafeForWork is None, 'SafeForWork should be bool based')
             
             self.assertTrue(hasattr(board, 'BoardName'), 'BoardName should be defined')
-            self.assertTrue(isinstance(board.BoardName, str) or board.BoardName is None, 'BoardName should be unicode based')
+            self.assertTrue(isinstance(board.BoardName, unicode) or board.BoardName is None, 'BoardName should be unicode based')
             
             self.assertEqual(board.getMinPage(), 0, 'Min page should always be zero')
             self.assertTrue(board.getMaxPage() >= 1, 'Max page should be at least 1')
@@ -140,7 +140,7 @@ class BoardIndexTestSequence(BoardConfigBasedTests):
             self.assertTrue(isinstance(board.TotalThreads(), int), "Total threads should be an int")
 
             self.assertTrue(
-                            isinstance(board.getBoardAPIPageURL(), str),
+                            isinstance(board.getBoardAPIPageURL(), (str, unicode)),
                             "URL should be a string. Got %r" % board.getBoardAPIPageURL(),
                             )
             self.assertTrue(board.getBoardAPIPageURL().startswith(board.Proto), "Protocol should match the API URL")
@@ -149,7 +149,7 @@ class BoardIndexTestSequence(BoardConfigBasedTests):
         boardDict = self.index.BoardsDict
         
         # Check data values for all known boards
-        for boardID, board in list(boardDict.items())[:self.recursionMaxBoards]:
+        for boardID, board in boardDict.items()[:self.recursionMaxBoards]:
             boardPages = board.getPages()
             self.assertTrue(len(boardPages) > 0, "Should have at least one page")
             totalItems = 0

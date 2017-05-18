@@ -25,9 +25,9 @@ import logging
 logger = logging.getLogger("Fourchapy." + __name__)
 log = logger.log
 
-from Fetcher import Fetch4chan
-from Board import FourchapyBoard
-from Errors import NoDataReturnedError  # Don't import *; it will overwrite logging vars
+from .Fetcher import Fetch4chan
+from .Board import FourchapyBoard
+from .Errors import NoDataReturnedError  # Don't import *; it will overwrite logging vars
 
 class FourchapyBoardIndex(Fetch4chan):
     """ Represent a list of all boards and info about those boards. 

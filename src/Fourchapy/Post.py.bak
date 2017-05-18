@@ -100,7 +100,7 @@ class FourchapyPost(Fetch4chan):
     
     def display(self, nameWidth = 15):
         """ Return a multi-line string that displays this post's info. """
-        print((self.displayToString(nameWidth = nameWidth)))
+        print(self.displayToString(nameWidth = nameWidth))
         
     def getImageURL(self):
         """ Returns the URL to download the image at. None if there isn't one """

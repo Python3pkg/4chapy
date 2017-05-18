@@ -16,7 +16,7 @@ log.setLevel(DEFAULT_LOGGING_LEVEL)
 # Config file telling us what tests to run and what data to use with the tests
 DEFAULT_CONFIG_FILE = 'test.conf.ini'
 
-from configparser import SafeConfigParser
+from ConfigParser import SafeConfigParser
 import re
 import unittest
 
@@ -53,7 +53,7 @@ class ConfigBasedTests(unittest.TestCase):
 #                                              default = None,
 #                                              vtype = 'str',
 #                                              )
-        for k, v in list(self.proxy.items()):
+        for k, v in self.proxy.items():
             if v is None:
                 del self.proxy[k]
         self.log.debug("Set proxy to %r", self.proxy)
